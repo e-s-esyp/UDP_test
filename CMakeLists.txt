@@ -10,15 +10,21 @@ set(CMAKE_AUTOUIC ON)
 find_package(Qt5 COMPONENTS
         Core
         Network
+        Widgets
         REQUIRED)
 qt5_wrap_cpp(MAIN_MOC main.cpp)
-add_executable(UDP_test main.cpp  UdpClientWorker.h
-        Receiver.h
-        Sender.h
+add_executable(UDP_test
+        main.cpp
         Receiver.cpp
-        Test.h)
+        Receiver.h
+        Sender.cpp
+        Sender.h
+        threadmanager.cpp
+        threadmanager.h
+        MainWindow.h)
 target_link_libraries(UDP_test
         Qt5::Core
         Qt5::Network
+        Qt5::Widgets
 )
 

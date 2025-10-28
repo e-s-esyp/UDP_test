@@ -1,25 +1,14 @@
-#include <QCoreApplication>
+#include <QApplication>
+#include "MainWindow.h"
+#include "threadmanager.h"
 
-#include "Test.h"
-
-int main(int argc, char *argv[]) {
-    QCoreApplication a(argc, argv);
-    qDebug() << "Hello World"; {
-        // const UdpClientWorker udpSocket;
-        // udpSocket.getAddr();
-        // qDebug() << "getAddr done";
-    }
-    auto senderThread = Test::test();
-    int result = a.exec();
-
-    // Корректно останавливаем поток при выходе
-    if (senderThread->isRunning()) {
-        senderThread->quit();
-        senderThread->wait(1000); // Ждем до 1 секунды для завершения
-    }
-
-    return result;
-    // return QCoreApplication::exec();
+int main(int argc, char *argv[])
+{
+    QApplication app(argc, argv);
+    ThreadManager threadManager;
+    MainWindow window(&threadManager);
+    window.show();
+    return QApplication::exec();
 }
 
-#include "main.moc"
+// #include "main.moc"

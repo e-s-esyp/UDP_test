@@ -11,12 +11,17 @@ class Receiver : public QObject
 
 public:
     explicit Receiver(quint16 port = 1234, QObject *parent = nullptr);
+    ~Receiver();
 
-private slots:
-    void onReadyRead();
+public slots:
+    void start() const;
+    void stop() const;
+    void onReadyRead() const;
 
 private:
     QUdpSocket *m_socket;
+    quint16 m_port;
+
 };
 
 #endif // RECEIVER_H
